@@ -6,7 +6,7 @@ ARG PY_VER=3.6.4
 ARG PYINSTALLER_VER=3.3
 
 # OS Arch
-ARG WINEARCH=amd64
+ARG WINEARCH=win32
 # install winehq and winetrics
 RUN dpkg --add-architecture i386 \
     && apt-get update && apt-get install -qfy --no-install-recommends \
@@ -27,8 +27,10 @@ ENV WINEARCH $WINEARCH
 ENV WINEDEBUG -all
 ENV WINEPREFIX /wine
 
+RUN echo "Downloading ... https://www.python.org/ftp/python/${PY_VER}/${OS_ARCH}/"
+RUN echo "Wine ARch ${WINEARCH}"
 # install python3 and pyinstaller
-RUN winetricks win7 \
+RUN winetricks winxp \
     && wget -A msi -m -p -E -k -K -np \
         "https://www.python.org/ftp/python/${PY_VER}/${OS_ARCH}/" \
     && cd www.python.org/ftp/python/${PY_VER}/${OS_ARCH}/ \
