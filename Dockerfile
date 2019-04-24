@@ -17,6 +17,7 @@ RUN dpkg --add-architecture i386 \
     && apt-get update && apt-get install -qfy --no-install-recommends \
         winehq-staging \
     && apt-get clean \
+    && apt-get install python2.7-mysqldb -y \
     && wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
     && chmod +x winetricks \
     && mv winetricks /usr/local/bin
